@@ -64,14 +64,52 @@ class OrderController extends Controller
     }
 
     public function search(Request $request){
+
+
         $key = explode(' ', $request['search']);
-        $orders=Order::where(['vendor_id'=>Helpers::get_restaurant_id()])->where(function ($q) use ($key) {
+        $status = $request->status;
+        $search = $request->search;
+
+        $orders= Order::query()
+        ->where(['vendor_id'=> Helpers::get_restaurant_id()])
+        ->when($status == 'pending', function($query){
+            return $query->Pending();
+        })
+        ->when($status == 'accepted', function($query){
+            return $query->Accepted();
+        })
+        ->when($status == 'processing', function($query){
+            return $query->Preparing();
+        })
+        ->when($status == 'services_ongoing', function($query){
+            return $query->ServiceOngoing();
+        })
+        ->when($status == 'completed', function($query){
+            return $query->Delivered();
+        })
+        ->when($status == 'canceled', function($query){
+            return $query->Canceled();
+        })
+        ->when($status == 'failed', function($query){
+            return $query->failed();
+        })
+        ->when($status == 'refunded', function($query){
+            return $query->Refunded();
+        })
+        ->when($status == 'scheduled', function($query){
+            return $query->Scheduled();
+        })
+        ->where(function ($q) use ($key) {
             foreach ($key as $value) {
-                $q->orWhere('id', 'like', "%{$value}%")
-                    ->orWhere('order_status', 'like', "%{$value}%")
-                    ->orWhere('transaction_reference', 'like', "%{$value}%");
+                $q->Where('id', 'like', "%{$value}%")
+                // ->orWhere('order_status', 'like', "%{$value}%")
+                ->orWhere('transaction_reference', 'like', "%{$value}%");
             }
-        })->get();
+        })
+        ->Notpos()
+        ->limit(50)->get();
+
+
         return response()->json([
             'view'=>view('vendor-views.order.partials._table',compact('orders'))->render()
         ]);
@@ -132,6 +170,17 @@ class OrderController extends Controller
                 Toastr::warning(trans('messages.order_confirmation_warning'));
                 return back();
             }
+        }
+
+        if($request->order_status == 'completed' || $request->order_status == 'delivered'){
+
+            if($order->order_status != 'services_ongoing'){
+
+                 Toastr::warning("Order has not been verified");
+                 return back();
+
+            }
+
         }
 
         if ($request->order_status == 'delivered') {

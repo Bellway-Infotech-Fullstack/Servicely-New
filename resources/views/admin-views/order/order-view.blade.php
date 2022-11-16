@@ -644,7 +644,7 @@
                     @else
                         <div class="w-100 text-center">
                             <div class="hs-unfold">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-lat='21.03' data-lng='105.85'>
+                                <button type="button" class="btn font-weight-bold" data-toggle="modal" data-target="#myModal" data-lat='21.03' data-lng='105.85'>
                                     Customer Service Info
                                 </button>
                             </div>

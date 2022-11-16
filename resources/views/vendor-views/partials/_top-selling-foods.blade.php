@@ -14,7 +14,7 @@
                  onclick="location.href='{{route('vendor.service.view',[$item['service_id']])}}'"
                  style="cursor: pointer;padding-right: 6px;padding-left: 6px">
                 <div class="grid-card">
-                    <label class="label_1">Sold : {{$item['count']}}</label>
+                    <label class="label_1">Booked : {{$item['count']}}</label>
                     <img style="width: 100%;height: 120px"
                          src="{{asset('storage/app/public/product')}}/{{$item->service['image']}}"
                          onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'"

@@ -41,7 +41,8 @@
             <div class="card-header">
                 <div class="row justify-content-between align-items-center flex-grow-1">
                     <div class="col-lg-6 mb-3 mb-lg-0">
-                        <form action="javascript:" id="search-form" enctype="multipart/form-data">
+
+                           <form action="javascript:" id="search-form">
                             <!-- Search -->
                             <div class="input-group input-group-merge input-group-flush">
                                 <div class="input-group-prepend">
@@ -51,8 +52,9 @@
                                 </div>
                                 <input id="datatableSearch_" type="search" name="search" class="form-control"
                                        placeholder="{{__('messages.search')}}" aria-label="{{__('messages.search')}}" required>
-                                {{-- <input type="hidden" name="status" value="{{ request('status') }}" /> --}}
-                                <button type="submit" class="btn btn-light">{{__('messages.search')}} {{ request('status') }}</button>
+                                       <input type="hidden" name="status" value="{{ request('status') }}" />
+                                <button type="submit" class="btn btn-light">{{__('messages.search')}}</button>
+
                             </div>
                             <!-- End Search -->
                         </form>
@@ -754,15 +756,17 @@
 
     <script>
         $('#search-form').on('submit', function () {
-            var formData = new FormData(this);
+            //var formData = new FormData(this);
+
+            var formData = $('#search-form').serialize();
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            alert(JSON.stringify(formData))
-            $.post({
+            $.get({
                 url: '{{route('admin.order.search')}}',
                 data: formData,
                 cache: false,

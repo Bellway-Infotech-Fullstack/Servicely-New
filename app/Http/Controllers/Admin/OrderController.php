@@ -219,47 +219,47 @@ class OrderController extends Controller
 
     public function search(Request $request){
         $key = explode(' ', $request['search']);
-        $status = $request('status');
-        $orders=
+        $status = $request->status;
+        $search = $request->search;
 
-        Order::where(function ($q) use ($key) {
+        $orders = Order::query()
+        ->when($status == 'pending', function($query){
+            return $query->Pending();
+        })
+        ->when($status == 'accepted', function($query){
+            return $query->Accepted();
+        })
+        ->when($status == 'processing', function($query){
+            return $query->Preparing();
+        })
+        ->when($status == 'services_ongoing', function($query){
+            return $query->ServiceOngoing();
+        })
+        ->when($status == 'completed', function($query){
+            return $query->Delivered();
+        })
+        ->when($status == 'canceled', function($query){
+            return $query->Canceled();
+        })
+        ->when($status == 'failed', function($query){
+            return $query->failed();
+        })
+        ->when($status == 'refunded', function($query){
+            return $query->Refunded();
+        })
+        ->when($status == 'scheduled', function($query){
+            return $query->Scheduled();
+        })
+        // ->Where('id', 100350)
+        ->where(function ($q) use ($key) {
             foreach ($key as $value) {
-                $q->orWhere('id', 'like', "%{$value}%")
-                ->orWhere('order_status', 'like', "%{$value}%")
+                $q->Where('id', 'like', "%{$value}%")
+                // ->orWhere('order_status', 'like', "%{$value}%")
                 ->orWhere('transaction_reference', 'like', "%{$value}%");
             }
         })
-        // ->when($status == 'searching_for_deliverymen', function($query){
-        //     return $query->SearchingForDeliveryman();
-        // })
-        // ->when($status == 'pending', function($query){
-        //     return $query->Pending();
-        // })
-        // ->when($status == 'accepted', function($query){
-        //     return $query->Accepted();
-        // })
-        // ->when($status == 'processing', function($query){
-        //     return $query->Preparing();
-        // })
-        // ->when($status == 'services_ongoing', function($query){
-        //     return $query->ServiceOngoing();
-        // })
-        // ->when($status == 'completed', function($query){
-        //     return $query->Delivered();
-        // })
-        // ->when($status == 'canceled', function($query){
-        //     return $query->Canceled();
-        // })
-        // ->when($status == 'failed', function($query){
-        //     return $query->failed();
-        // })
-        // ->when($status == 'refunded', function($query){
-        //     return $query->Refunded();
-        // })
-        // ->when($status == 'scheduled', function($query){
-        //     return $query->Scheduled();
-        // })
-        ->Notpos()->limit(50)->get();
+        ->Notpos()
+        ->limit(50)->get();
 
         return response()->json([
             'view'=>view('admin-views.order.partials._table',compact('orders'))->render()
@@ -399,6 +399,17 @@ class OrderController extends Controller
             }                   
         }
 
+
+        if($request->order_status == 'completed' || $request->order_status == 'delivered'){
+
+            if($order->order_status != 'services_ongoing'){
+
+                 Toastr::warning("Order has not been verified");
+                 return back();
+
+            }
+
+        }
 
         /*START OTP*/
         if($request->order_status === 'accepted'){

@@ -224,7 +224,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('restaurant-filter/{restaurant_id}', 'OrderController@restaurnt_filter')->name('restaurant-filter');
             Route::get('filter/reset', 'OrderController@filter_reset');
             Route::post('filter', 'OrderController@filter')->name('filter');
-            Route::post('search', 'OrderController@search')->name('search');
+            Route::get('search', 'OrderController@search')->name('search');
             //order update
             Route::post('add-to-cart', 'OrderController@add_to_cart')->name('add-to-cart');
             Route::post('remove-from-cart', 'OrderController@remove_from_cart')->name('remove-from-cart');

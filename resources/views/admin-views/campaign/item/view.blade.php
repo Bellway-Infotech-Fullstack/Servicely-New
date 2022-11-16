@@ -134,7 +134,7 @@
                             {{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}} : {{$campaign->end_time->format(config('timeformat'))}}
                         </small>
                     </div>
-                    <div class="col-sm-3 border-left text-center">
+                    {{-- <div class="col-sm-3 border-left text-center">
                         <span class="mb-1">Restaurant info</span>
                         @if($campaign->restaurant)
                         <a href="{{route('admin.vendor.view', $campaign->restaurant_id)}}" title="{{$campaign->restaurant['name']}}">
@@ -148,7 +148,7 @@
                         @else
                         <span class="badge-info">{{__('messages.restaurant')}} {{__('messages.deleted')}}</span>
                         @endif
-                    </div>
+                    </div> --}}
                     <div class="col-12 pt-2">
                         <div class="card">
                             <div class="card-body">

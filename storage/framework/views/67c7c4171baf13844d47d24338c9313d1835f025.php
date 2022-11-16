@@ -1,23 +1,19 @@
-@extends('layouts.admin.app')
+<?php $__env->startSection('title','Campaign view'); ?>
 
-@section('title','Campaign view')
+<?php $__env->startPush('css_or_js'); ?>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+<?php $__env->stopPush(); ?>
 
-@push('css_or_js')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endpush
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h1 class="page-header-title">{{$campaign->title}}</h1>
+                    <h1 class="page-header-title"><?php echo e($campaign->title); ?></h1>
                 </div>
                 <div class="col-6">
-                    {{--<a href="{{url()->previous()}}" class="btn btn-primary float-right">
-                        <i class="tio-back-ui"></i> {{__('messages.back')}}
-                    </a>--}}
+                    
                 </div>
             </div>
         </div>
@@ -30,8 +26,8 @@
                     <div class="col-md-auto mb-3 mb-md-0">
                         <div class="d-flex align-items-center">
                             <img class="avatar avatar-xxl avatar-4by3 mr-4"
-                                 src="{{asset('storage/app/public/campaign')}}/{{$campaign->image}}"
-                                 onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'"
+                                 src="<?php echo e(asset('storage/app/public/campaign')); ?>/<?php echo e($campaign->image); ?>"
+                                 onerror="this.src='<?php echo e(asset('public/assets/admin/img/160x160/img2.jpg')); ?>'"
                                  alt="Image Description">
                             <div class="d-block">
                                 
@@ -41,8 +37,8 @@
                     </div>
 
                     <div class="col-md">
-                        <h4>{{__('messages.short')}} {{__('messages.description')}} : </h4>
-                        <p>{{$campaign->description}}</p>
+                        <h4><?php echo e(__('messages.short')); ?> <?php echo e(__('messages.description')); ?> : </h4>
+                        <p><?php echo e($campaign->description); ?></p>
                     </div>
 
                 </div>
@@ -64,33 +60,33 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>{{__('messages.#')}}</th>
-                                <th style="width: 15%">{{__('messages.logo')}}</th>
-                                <th style="width: 20%">{{__('messages.restaurant')}}</th>
-                                <th style="width: 25%">{{__('messages.owner')}}</th>
-                                <th>{{__('messages.email')}}</th>
-                                <th>{{__('messages.phone')}}</th>
-                                <th>{{__('messages.action')}}</th>
+                                <th><?php echo e(__('messages.#')); ?></th>
+                                <th style="width: 15%"><?php echo e(__('messages.logo')); ?></th>
+                                <th style="width: 20%"><?php echo e(__('messages.restaurant')); ?></th>
+                                <th style="width: 25%"><?php echo e(__('messages.owner')); ?></th>
+                                <th><?php echo e(__('messages.email')); ?></th>
+                                <th><?php echo e(__('messages.phone')); ?></th>
+                                <th><?php echo e(__('messages.action')); ?></th>
                             </tr>
                             <tr>
                                 <th colspan="3">
-                                    <form action="{{route('admin.campaign.addrestaurant',$campaign->id)}}" id="restaurant-add-form" method="POST">
-                                        @csrf
+                                    <form action="<?php echo e(route('admin.campaign.addrestaurant',$campaign->id)); ?>" id="restaurant-add-form" method="POST">
+                                        <?php echo csrf_field(); ?>
                                         <!-- Search -->
                                         <div class="row">
                                             <div class="input-group-prepend col-md-7">   
-                                            @php($allrestaurants=App\Models\Restaurant::all())
+                                            <?php ($allrestaurants=App\Models\Restaurant::all()); ?>
                                                 <select name="restaurant_id" id="restaurant_id" class="form-control">
-                                                    @forelse($allrestaurants as $restaurant)
-                                                    @if(!in_array($restaurant->id, $restaurant_ids))
-                                                    <option value="{{$restaurant->id}}" >{{$restaurant->name}}</option>
-                                                    @endif
-                                                    @empty
+                                                    <?php $__empty_1 = true; $__currentLoopData = $allrestaurants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $restaurant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                                    <?php if(!in_array($restaurant->id, $restaurant_ids)): ?>
+                                                    <option value="<?php echo e($restaurant->id); ?>" ><?php echo e($restaurant->name); ?></option>
+                                                    <?php endif; ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                                     <option value="">No data found</option>
-                                                    @endforelse
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-primary col-md-5">{{__('messages.add')}} {{__('messages.restaurant')}}</button>
+                                            <button type="submit" class="btn btn-primary col-md-5"><?php echo e(__('messages.add')); ?> <?php echo e(__('messages.restaurant')); ?></button>
 
                                         </div>
                                         <!-- End Search -->
@@ -107,8 +103,8 @@
                                                 </div>
                                             </div>
                                             <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                                   placeholder="{{__('messages.search')}}" aria-label="Search" required>
-                                            <button type="submit" class="btn btn-primary">{{__('messages.search')}}</button>
+                                                   placeholder="<?php echo e(__('messages.search')); ?>" aria-label="Search" required>
+                                            <button type="submit" class="btn btn-primary"><?php echo e(__('messages.search')); ?></button>
 
                                         </div>
                                         <!-- End Search -->
@@ -118,45 +114,49 @@
                             </thead>
 
                             <tbody id="set-rows">
-                            @foreach($vendors as $key=>$dm)
+                            <?php $__currentLoopData = $vendors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$dm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td>{{$key+1}}</td>
+                                    <td><?php echo e($key+1); ?></td>
                                     <td>
                                         <div style="height: 60px; width: 60px; overflow-x: hidden;overflow-y: hidden">
                                             <img width="60" style="border-radius: 50%"
-                                                 onerror="this.src='{{asset('public/assets/admin/img/160x160/img1.jpg')}}'"
-                                                 src="{{asset('storage/app/public/restaurant')}}/{{$dm['logo']}}">
+                                                 onerror="this.src='<?php echo e(asset('public/assets/admin/img/160x160/img1.jpg')); ?>'"
+                                                 src="<?php echo e(asset('storage/app/public/restaurant')); ?>/<?php echo e($dm['logo']); ?>">
                                         </div>
                                     </td>
                                     <td>
                                         <span class="d-block font-size-sm text-body">
-                                            {{$dm->name}}
+                                            <?php echo e($dm->name); ?>
+
                                         </span>
                                     </td>
                                     <td>
                                         <span class="d-block font-size-sm text-body">
-                                            {{$dm->vendor->f_name.' '.$dm->vendor->l_name}}
+                                            <?php echo e($dm->vendor->f_name.' '.$dm->vendor->l_name); ?>
+
                                         </span>
                                     </td>
                                     <td>
-                                        {{$dm->email}}
-                                        {{--<span class="d-block font-size-sm">{{$campaign['image']}}</span>--}}
+                                        <?php echo e($dm->email); ?>
+
+                                        
                                     </td>
                                     <td>
-                                        {{$dm['phone']}}
+                                        <?php echo e($dm['phone']); ?>
+
                                     </td>
                                     <td>
                                         <a class="btn btn-sm btn-white text-danger" href="javascript:"
-                                            onclick="form_alert('campaign-{{$campaign['id']}}','Want to remove this restaurant ?')" title="{{__('messages.delete')}} {{__('messages.campaign')}}"><i class="tio-delete-outlined"></i>
+                                            onclick="form_alert('campaign-<?php echo e($campaign['id']); ?>','Want to remove this restaurant ?')" title="<?php echo e(__('messages.delete')); ?> <?php echo e(__('messages.campaign')); ?>"><i class="tio-delete-outlined"></i>
                                         </a>
                                         
-                                        <form action="{{route('admin.campaign.remove-restaurant',[$campaign->id, $dm['id']])}}"
-                                                      method="GET" id="campaign-{{$campaign['id']}}">
-                                            @csrf
+                                        <form action="<?php echo e(route('admin.campaign.remove-restaurant',[$campaign->id, $dm['id']])); ?>"
+                                                      method="GET" id="campaign-<?php echo e($campaign['id']); ?>">
+                                            <?php echo csrf_field(); ?>
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                         <hr>
@@ -164,7 +164,8 @@
                         <div class="page-area">
                             <table>
                                 <tfoot>
-                                {!! $vendors->links() !!}
+                                <?php echo $vendors->links(); ?>
+
                                 </tfoot>
                             </table>
                         </div>
@@ -177,9 +178,9 @@
         </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script_2')
+<?php $__env->startPush('script_2'); ?>
     <script>
         $(document).on('ready', function () {
             // INITIALIZATION OF DATATABLES
@@ -233,7 +234,7 @@
                 }
             });
             $.post({
-                url: '{{route('admin.vendor.search')}}',
+                url: '<?php echo e(route('admin.vendor.search')); ?>',
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -251,4 +252,6 @@
             });
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.admin.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\servicely-new\resources\views/admin-views/campaign/basic/view.blade.php ENDPATH**/ ?>
