@@ -43,8 +43,8 @@ class VendorController extends Controller
             // 'kyc' => 'required',
             'aadhaar_card_number' => 'required|numeric',
             'pan_card_number' => 'required|alpha_num',
-            // 'latitude' => 'required',
-            // 'longitude' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'bank_name' => 'required',
             'branch' => 'required',
             'holder_name' => 'required',
@@ -102,8 +102,8 @@ class VendorController extends Controller
         $vendor->aadhaar_back_image = Helpers::upload('restaurant/identity/', 'png', $request->file('aadhaar_back_image'));
         $vendor->pan_card_image = Helpers::upload('restaurant/identity/', 'png', $request->file('pan_card_image'));
 
-        // $vendor->latitude = $request->latitude;
-        // $vendor->longitude = $request->longitude;
+        $vendor->latitude = $request->latitude;
+        $vendor->longitude = $request->longitude;
         $vendor->zone_id = $request->zone_id;
         // $vendor->tax = $request->tax;
         $vendor->delivery_time = $request->minimum_delivery_time .'-'. $request->maximum_delivery_time;
@@ -141,8 +141,8 @@ class VendorController extends Controller
             'email' => 'required|unique:vendors,email,'.$vendor->id,
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|unique:vendors,phone,'.$vendor->id,
             'zone_id' => 'required|exists:zones,id',
-            // 'latitude' => 'required',
-            // 'longitude' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             // 'tax' => 'required',
             'bank_name' => 'required',
             'branch' => 'required',
@@ -159,10 +159,6 @@ class VendorController extends Controller
             'l_name.required' => 'Last name is required!'
         ]);
 
-
-// aadhaar_front_image
-// aadhaar_back_image
-// pan_card_image
 
         // if($request->zone_id)
         // {
@@ -201,8 +197,8 @@ class VendorController extends Controller
 
         $vendor->password = strlen($request->password)>1?bcrypt($request->password):$vendor->password;
         $vendor->address = $request->address;
-        // $vendor->latitude = $request->latitude;
-        // $vendor->longitude = $request->longitude;
+        $vendor->latitude = $request->latitude;
+        $vendor->longitude = $request->longitude;
         $vendor->cover_photo = $request->has('cover_photo') ? Helpers::update('restaurant/cover/', $vendor->cover_photo, 'png', $request->file('cover_photo')) : $vendor->cover_photo;
 
         $vendor->aadhaar_front_image = $request->has('aadhaar_front_image') ? Helpers::update('restaurant/identity/', $vendor->aadhaar_front_image, 'png', $request->file('aadhaar_front_image')) : $vendor->aadhaar_front_image;

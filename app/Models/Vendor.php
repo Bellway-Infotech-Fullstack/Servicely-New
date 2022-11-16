@@ -11,7 +11,7 @@ class Vendor extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['schedule_order'];
+    protected $guarded = [];
 
     protected $casts = [
         'created_at' => 'datetime',
