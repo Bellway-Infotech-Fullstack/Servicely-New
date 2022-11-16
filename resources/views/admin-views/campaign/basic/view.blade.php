@@ -133,11 +133,11 @@
                                             {{$dm->name}}
                                         </span>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <span class="d-block font-size-sm text-body">
                                             {{$dm->vendor->f_name.' '.$dm->vendor->l_name}}
                                         </span>
-                                    </td>
+                                    </td> --}}
                                     <td>
                                         {{$dm->email}}
                                         {{--<span class="d-block font-size-sm">{{$campaign['image']}}</span>--}}
