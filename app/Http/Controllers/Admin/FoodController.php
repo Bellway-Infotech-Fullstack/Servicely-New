@@ -453,7 +453,7 @@ class FoodController extends Controller
 
     public function search(Request $request){
         $key = explode(' ', $request['search']);
-        $foods=Food::withoutGlobalScope(RestaurantScope::class)->where(function ($q) use ($key) {
+        $foods=Food::withoutGlobalScope(Restaura         ntScope::class)->where(function ($q) use ($key) {
             foreach ($key as $value) {
                 $q->where('name', 'like', "%{$value}%");
             }
