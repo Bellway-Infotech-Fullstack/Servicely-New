@@ -36,6 +36,13 @@ class VendorController extends Controller
 
     public function store(Request $request)
     {
+
+        
+
+
+
+
+
         $validator = Validator::make($request->all(), [
             'f_name' => 'required',
             'l_name' => 'required',
@@ -57,6 +64,10 @@ class VendorController extends Controller
             'maximum_delivery_time' => 'required|regex:/^([0-9]{2})$/|min:2|max:2',
             'password' => 'required|min:6',
             'zone_id' => 'required|exists:zones,id',
+            'cover_photo' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'aadhaar_back_image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'aadhaar_front_image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'pan_card_image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
             'logo' => 'required',
             // 'tax' => 'required',
         ], [
@@ -152,6 +163,11 @@ class VendorController extends Controller
             'aadhaar_card_number' => 'required|numeric',
             'pan_card_number' => 'required|alpha_num',
             'password' => 'nullable|min:6',
+            'cover_photo' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'aadhaar_back_image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'aadhaar_front_image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'pan_card_image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
+            'logo' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
             'minimum_delivery_time' => 'required|regex:/^([0-9]{2})$/|min:2|max:2',
             'maximum_delivery_time' => 'required|regex:/^([0-9]{2})$/|min:2|max:2',
         ], [

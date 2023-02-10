@@ -33,7 +33,7 @@ class ServiceController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'category_id' => 'required',
-            'image' => 'required',
+            'image' => 'required|nullable|image|max:3072|mimes:png,jpg,jpeg',
             'price' => 'required|numeric|min:.01',
             'discount' => 'required|numeric|min:0',
             'vendor_id' => 'required',
@@ -185,7 +185,7 @@ class ServiceController extends Controller
             'category_id' => 'required',
             'price' => 'required|numeric|min:.01',
             'vendor_id' => 'required',
-            // 'veg' => 'required',
+            'image' => 'nullable|image|max:3072|mimes:png,jpg,jpeg',
             'description' => 'max:1000',
             'discount' => 'required|numeric|min:0',
         ], [
