@@ -19,16 +19,16 @@
 <main id="content" role="main" class="main pointer-event">
     <div class="content container-fluid">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
 
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <h2 class="float-right">#INVOICE</h2>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4">
                 <img width="150"
                      src="{{asset('storage/app/public/restaurant')}}/{{\App\Models\BusinessSetting::where(['key'=>'logo'])->first()->value}}">
                 <br><br>
@@ -36,8 +36,8 @@
                 <strong>Email : {{\App\Models\BusinessSetting::where(['key'=>'email_address'])->first()->value}}</strong><br>
                 <strong>Address : {{\App\Models\BusinessSetting::where(['key'=>'address'])->first()->value}}</strong><br><br>
             </div>
-            <div class="col-4"></div>
-            <div class="col-4">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
                 @if($order->customer)
                     <strong class="float-right">Order ID : {{$order['id']}}</strong><br>
                     <strong class="float-right">Customer Name
@@ -51,25 +51,25 @@
         </div>
 
         <div class="row">
-            <div class="col-12 mb-3">
+            <div class="col-md-12 mb-3">
                 <!-- Card -->
                 <div class="card mb-3 mb-lg-5">
                     <!-- Header -->
                     <div class="card-header" style="display: block!important;">
                         <div class="row">
-                            <div class="col-12 pb-2 border-bottom">
+                            <div class="col-md-12 pb-2 border-bottom">
                                 <h4 class="card-header-title">
                                     Order details
                                     <span
                                         class="badge badge-soft-dark rounded-circle ml-1">{{$order->details->count()}}</span>
                                 </h4>
                             </div>
-                            <div class="col-6 pt-2">
+                            <div class="col-md-6 pt-2">
                                 <h6 style="color: #8a8a8a;">
                                     Order Note : {{$order['order_note']}}
                                 </h6>
                             </div>
-                            <div class="col-6 pt-2">
+                            <div class="col-md-6 pt-2">
                                 <div class="text-right">
                                     <h6 class="text-capitalize" style="color: #8a8a8a;">
                                         Payment Method : {{str_replace('_',' ',$order['payment_method'])}}

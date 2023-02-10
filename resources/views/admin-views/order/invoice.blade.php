@@ -44,7 +44,7 @@
                 </center>
                 <hr class="non-printable">
             </div>
-            <div class="col-5">
+            <div class="col-md-6">
                 <div class="text-center pt-4 mb-3">
                     <h2 style="line-height: 1">{{$order->vendor->names()}}</h2>
                     <h5 style="font-size: 20px;font-weight: lighter;line-height: 1">
@@ -57,10 +57,10 @@
 
                 <span>---------------------------------------------------------------------------------</span>
                 <div class="row mt-3">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <h5>Order ID : {{$order['id']}}</h5>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <h5 style="font-weight: lighter">
                             {{date('d/M/Y '.config('timeformat'),strtotime($order['created_at']))}}
                         </h5>
