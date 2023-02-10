@@ -44,7 +44,7 @@
                     @csrf
                     <div class="card mt-2 rest-part">
                         <div class="card-header">
-                            <h4>Import Foods File</h4>
+                            <h4>Import Servicies File</h4>
                             <a href="{{asset('public/assets/restaurant_panel/foods_bulk_format.xlsx')}}" download=""
                                class="btn btn-secondary">Download Format</a>
                         </div>
