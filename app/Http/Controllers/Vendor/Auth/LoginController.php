@@ -20,10 +20,10 @@ class LoginController extends Controller
 
     public function login()
     {
-        $custome_recaptcha = new CaptchaBuilder;
-        $custome_recaptcha->build();
-        Session::put('custome_recaptcha', $custome_recaptcha);
-        return view('vendor-views.auth.login', compact('custome_recaptcha'));
+        // $custome_recaptcha = new CaptchaBuilder;
+        // $custome_recaptcha->build();
+        // Session::put('custome_recaptcha', $custome_recaptcha);
+        return view('vendor-views.auth.login');
     }
 
     public function submit(Request $request)

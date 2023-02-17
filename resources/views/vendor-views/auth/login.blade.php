@@ -203,7 +203,7 @@
                             <!-- End Checkbox -->
 
                             {{-- recaptcha --}}
-                            @php($recaptcha = \App\CentralLogics\Helpers::get_business_settings('recaptcha'))
+                           {{--  @php($recaptcha = \App\CentralLogics\Helpers::get_business_settings('recaptcha'))
                             @if(isset($recaptcha) && $recaptcha['status'] == 1)
                                 <div id="recaptcha_element2" style="width: 100%;" data-type="image"></div>
                                 <br/>
@@ -217,7 +217,7 @@
                                         <img src="<?php echo $custome_recaptcha->inline(); ?>" style="width: 100%; border-radius: 4px;"/>
                                     </div>
                                 </div>
-                            @endif
+                            @endif --}}
 
                             <button type="submit" class="btn btn-lg btn-block btn-primary">{{__('messages.sine_in')}}</button>
 

@@ -147,7 +147,7 @@ class FoodController extends Controller
         $food->discount_type = $request->discount_type;
         // $food->attributes = $request->has('attribute_id') ? json_encode($request->attribute_id) : json_encode([]);
         // $food->add_ons = $request->has('addon_ids') ? json_encode($request->addon_ids) : json_encode([]);
-        $food->attributes = json_encode([]);
+        // $food->attributes = json_encode([]);
         $food->add_ons = json_encode([]);
         $food->vendor_id = Helpers::get_restaurant_id();
         $food->save();
@@ -308,8 +308,8 @@ class FoodController extends Controller
         $p->discount_type = $request->discount_type;
         // $p->attributes = $request->has('attribute_id') ? json_encode($request->attribute_id) : json_encode([]);
         // $p->add_ons = $request->has('addon_ids') ? json_encode($request->addon_ids) : json_encode([]);
-        $food->attributes = json_encode([]);
-        $food->add_ons = json_encode([]);
+        // $food->attributes = json_encode([]);
+        // $food->add_ons = json_encode([]);
 
         $p->save();
 
