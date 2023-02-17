@@ -28,7 +28,6 @@ class RazorPayController extends Controller
         //Fetch payment information by razorpay_payment_id
         $payment = $api->payment->fetch($input['razorpay_payment_id']);
 
-
         if (count($input) && !empty($input['razorpay_payment_id'])) {
 
             try {
@@ -42,7 +41,7 @@ class RazorPayController extends Controller
                 if(strlen($order->transaction_reference) === 0){
 
                       $order->transaction_reference = $tr_ref;
-                      $order->payment_method = 'razor_pay';
+                      $order->payment_method = $payment['method'];
                       $order->payment_status = 'paid';
                       $order->order_status = 'pending';
                       // $order->confirmed = now();
