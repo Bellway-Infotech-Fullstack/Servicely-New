@@ -359,9 +359,8 @@ class VendorController extends Controller
             $q->whereIn('vendors.zone_id', $zone_ids);
           })
         ->where('services.name', 'like', '%'.$request->q.'%')
-        // ->limit(8)
-        ->get([DB::raw('services.id as id, services.name as text')]);
-        // ->get([DB::raw('services.id as id, CONCAT(vendors.f_name, " (", services.name,")") as text')]);
+        ->limit(8)
+        ->get([DB::raw('services.id as id, CONCAT(vendors.f_name, " (", services.name,")") as text')]);
 
         if(isset($request->all))
         {
