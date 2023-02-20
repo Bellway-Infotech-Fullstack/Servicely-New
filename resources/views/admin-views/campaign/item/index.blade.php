@@ -62,7 +62,9 @@
                             <div class="form-group">
                                 <label class="input-label" for="exampleFormControlSelect1">{{__('messages.service')}}<span
                                         class="input-label-secondary">*</span></label>
-                                <select name="service_id" class="js-data-example-ajax form-control" onchange="getRestaurantData('{{url('/')}}/admin/vendor/get-addons?data[]=0&vendor_id='+this.value,'add_on')"  title="Select Service" required>
+                                <select name="service_id" class="js-data-example-ajax form-control" 
+                                {{-- onchange="getRestaurantData('{{url('/')}}/admin/vendor/get-addons?data[]=0&vendor_id='+this.value,'add_on')"   --}}
+                                title="Select Service" required>
                                 <option selected>Select Service</option>
                                     
                                 </select>

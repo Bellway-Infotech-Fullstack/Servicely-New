@@ -345,7 +345,7 @@ class VendorController extends Controller
 
     public function get_services(Request $request){
 
-         $zone_ids = isset($request->zone_ids)?(count($request->zone_ids)>0?$request->zone_ids:[]): 0;
+         $zone_ids = isset($request->zone_ids)?(count($request->zone_ids)>0?$request->zone_ids:[]):0;
         // $data = Vendor::join('zones', 'zones.id', '=', 'vendors.zone_id')
         // ->when($zone_ids, function($query) use($zone_ids){
         //     $query->whereIn('services.zone_id', $zone_ids);
