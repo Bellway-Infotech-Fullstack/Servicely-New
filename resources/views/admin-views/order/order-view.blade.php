@@ -701,18 +701,24 @@
                                         {{$order->customer['phone']}}
                                     </a>
                                 </li>
-                                <li>
-                                   
-                                        @foreach ($order->customer->addresses as $address)
+                                <li class="deco-none">
+                                     <i class="tio-map mr-2"></i>
+
+                                   <span>
+                                    {{ json_decode($order->delivery_address, true)['address'] ?? '' }}
+                                    </span>
+
+
+                                        {{-- @foreach ($order->customer->addresses as $address)
                                              <div class="deco-none" >
                                                 <i class="tio-map mr-2"></i>
                                                  {{ $address->address }}
                                             </div> 
-                                        @endforeach
+                                        @endforeach --}}
                                 </li>
                             </ul>
 
-                           {{--  @if($order->delivery_address)
+                            {{-- @if($order->delivery_address)
                                 <hr>
                                 @php($address=json_decode($order->delivery_address,true))
                                 <div class="d-flex justify-content-between align-items-center">
