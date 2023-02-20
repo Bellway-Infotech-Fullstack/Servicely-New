@@ -353,13 +353,15 @@ class VendorController extends Controller
         //     $query->whereIn('services.zone_id', $zone_ids);
         // })->where('services.name', 'like', '%'.$request->q.'%')->limit(8)->get([DB::raw('services.id as id, CONCAT(vendors.f_name, " (", zones.name,")") as text')]);
 
-        $data = Service::join('vendors', 'vendors.id', '=', 'services.vendor_id')
-        ->whereHas('vendor', function($q) use($zone_ids) {
-            $q->whereIn('vendors.zone_id', $zone_ids);
-          })
-        ->where('services.name', 'like', '%'.$request->q.'%')
-        ->limit(8)
-        ->get([DB::raw('services.id as id, CONCAT(vendors.f_name, " (", services.name,")") as text')]);
+        $data = Service::query()
+        // ->join('vendors', 'vendors.id', '=', 'services.vendor_id')
+        // ->whereHas('vendor', function($q) use($zone_ids) {
+        //     $q->whereIn('vendors.zone_id', $zone_ids);
+        //   })
+        // ->where('services.name', 'like', '%'.$request->q.'%')
+        // ->limit(8)
+        ->get([DB::raw('services.id as id, services.name as text')]);
+        // ->get([DB::raw('services.id as id, CONCAT(vendors.f_name, " (", services.name,")") as text')]);
 
         if(isset($request->all))
         {
