@@ -345,7 +345,7 @@ class VendorController extends Controller
 
     public function get_services(Request $request){
 
-         $zone_ids = isset($request->zone_ids)?(count($request->zone_ids)>0?$request->zone_ids:[]):0;
+         $zone_ids = isset($request->zone_ids)?(count($request->zone_ids)>0?$request->zone_ids:[]): 0;
         // $data = Vendor::join('zones', 'zones.id', '=', 'vendors.zone_id')
         // ->when($zone_ids, function($query) use($zone_ids){
         //     $query->whereIn('services.zone_id', $zone_ids);
@@ -353,7 +353,7 @@ class VendorController extends Controller
 
 
         $data = Service::join('vendors', 'vendors.id', '=', 'services.vendor_id')->whereHas('vendor', function($q) use($zone_ids) {
-            $q->whereIn('zone_id', $zone_ids);
+            // $q->whereIn('zone_id', $zone_ids);
           })->where('services.name', 'like', '%'.$request->q.'%')->limit(8)->get([DB::raw('services.id as id, CONCAT(vendors.f_name, " (", services.name,")") as text')]);
 
         if(isset($request->all))
