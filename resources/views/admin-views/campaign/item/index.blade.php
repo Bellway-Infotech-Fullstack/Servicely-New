@@ -349,7 +349,6 @@
             $('#zone').on('change', function(){
                 if($(this).val())
                 {
-                    alert($(this).val());
                     zone_id = [$(this).val()];
                 }
                 else

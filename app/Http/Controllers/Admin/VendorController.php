@@ -355,9 +355,9 @@ class VendorController extends Controller
 
         $data = Service::query()
         ->join('vendors', 'vendors.id','services.vendor_id')
-        // ->whereHas('vendor', function($q) use($zone_ids) {
-        //     $q->whereIn('vendors.zone_id', $zone_ids);
-        //   })
+        ->whereHas('vendor', function($q) use($zone_ids) {
+            $q->whereIn('vendors.zone_id', $zone_ids);
+          })
         // ->where('services.name', 'like', '%'.$request->q.'%')
         // ->limit(8)
         ->get([DB::raw('services.id as id, services.name as text')]);
