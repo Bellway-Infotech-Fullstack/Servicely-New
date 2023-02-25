@@ -65,7 +65,7 @@
                                 <select name="service_id" class="js-data-example-ajax form-control" 
                                 {{-- onchange="getRestaurantData('{{url('/')}}/admin/vendor/get-addons?data[]=0&vendor_id='+this.value,'add_on')"   --}}
                                 title="Select Service" required>
-                                <option selected value="">Select Service</option>
+                                <option selected value=" ">Select Service</option>
                                     
                                 </select>
                             </div>
