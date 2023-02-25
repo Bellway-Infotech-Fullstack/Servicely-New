@@ -397,6 +397,8 @@
                 }
             });
 
+            $('.js-data-example-ajax').trigger('change')
+
 
              $('.js-data-vendor-ajax').select2({
                 ajax: {
