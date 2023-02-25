@@ -168,7 +168,7 @@
             url: '{{url('/')}}/admin/vendor/get-restaurants',
             data: function (params) {
                 return {
-                    q: params.term, // search term
+                    q: params.term ? params.term  : ' ', // search term
                     page: params.page
                 };
             },
