@@ -164,7 +164,8 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label class="input-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}}</label>
-                                <input type="time" value="{{$product['available_time_starts']}}" min="{{$opening_time}}"
+                                <input type="time" 
+                                value="{{$product['available_time_starts']}}" 
                                        name="available_time_starts" class="form-control"
                                        step="any"
 
@@ -177,8 +178,8 @@
                                 <input type="time" value="{{$product['available_time_ends']}}"
                                        name="available_time_ends" class="form-control" 
                                        step="any"
-                                       max="{{$closing_time}}" placeholder="5:45 pm"
-                                       
+                                       placeholder="5:45 pm"
+
                                        required>
                             </div>
                         </div>
