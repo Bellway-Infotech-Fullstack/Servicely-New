@@ -397,8 +397,6 @@
                 }
             }).trigger('change');
 
-
-
              $('.js-data-vendor-ajax').select2({
                 ajax: {
                     url: '{{url('/')}}/admin/vendor/get-restaurants',
