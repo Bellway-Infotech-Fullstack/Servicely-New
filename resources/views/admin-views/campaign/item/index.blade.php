@@ -65,7 +65,7 @@
                                 <select name="service_id" class="js-data-example-ajax form-control" 
                                 {{-- onchange="getRestaurantData('{{url('/')}}/admin/vendor/get-addons?data[]=0&vendor_id='+this.value,'add_on')"   --}}
                                 title="Select Service" required>
-                                <option selected value=" ">Select Service</option>
+                                <option selected>Select Service</option>
                                     
                                 </select>
                             </div>
@@ -369,41 +369,13 @@
                 }
             });
 
-            $('.js-data-example-ajax').on('change', function(){
-                $('.js-data-example-ajax').select2({
-                    ajax: {
-                        url: '{{url('/')}}/admin/vendor/get-services',
-                        data: function (params) {
-                            return {
-                                q: params.term, // search term
-                                zone_ids: zone_id,
-                                vendor_id: vendor_id,
-                                page: params.page
-                            };
-                        },
-                        processResults: function (data) {
-                            return {
-                            results: data
-                            };
-                        },
-                        __port: function (params, success, failure) {
-                            var $request = $.ajax(params);
-
-                            $request.then(success);
-                            $request.fail(failure);
-
-                            return $request;
-                        }
-                    }
-                });
-            });
- 
+           
             $('.js-data-example-ajax').select2({
                 ajax: {
                     url: '{{url('/')}}/admin/vendor/get-services',
                     data: function (params) {
                         return {
-                            q: params.term, // search term
+                            q: params.term ? params.term : ' ', // search term
                             zone_ids: zone_id,
                             vendor_id: vendor_id,
                             page: params.page
