@@ -159,6 +159,7 @@
                                         <input type="number" name="account_no" 
                                                class="form-control" id="account_no"
                                                value="{{$vendor->account_no}}"
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1').substring(0, 17);"
                                                required>
                                     </div>
 
@@ -173,6 +174,7 @@
                                         <input type="text" name="ifsc_code" 
                                                class="form-control" id="ifsc_code"
                                                value="{{$vendor->ifsc_code}}"
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1').substring(0, 11);"
                                                required>
                                     </div>
                                 </div>
