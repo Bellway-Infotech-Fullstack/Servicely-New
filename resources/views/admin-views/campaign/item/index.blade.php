@@ -369,6 +369,34 @@
                 }
             });
 
+            $('.js-data-example-ajax').on('change', function(){
+                $('.js-data-example-ajax').select2({
+                    ajax: {
+                        url: '{{url('/')}}/admin/vendor/get-services',
+                        data: function (params) {
+                            return {
+                                q: params.term, // search term
+                                zone_ids: zone_id,
+                                vendor_id: vendor_id,
+                                page: params.page
+                            };
+                        },
+                        processResults: function (data) {
+                            return {
+                            results: data
+                            };
+                        },
+                        __port: function (params, success, failure) {
+                            var $request = $.ajax(params);
+
+                            $request.then(success);
+                            $request.fail(failure);
+
+                            return $request;
+                        }
+                    }
+                });
+            });
  
             $('.js-data-example-ajax').select2({
                 ajax: {
@@ -397,7 +425,7 @@
                 }
             });
 
-            $('.js-data-example-ajax').reload()
+            $('.js-data-example-ajax').trigger('change');
 
 
              $('.js-data-vendor-ajax').select2({
