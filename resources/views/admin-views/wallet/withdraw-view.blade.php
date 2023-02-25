@@ -83,7 +83,7 @@
             </div>
         </div>
         
-        @if($wr->vendor->restaurants)
+       {{--  @if($wr->vendor->restaurants)
             <div class="col-md-4">
                 <div class="card" style="min-height: 260px;">
                     <div class="card-header">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif --}}
         <div class="col-md-4">
             <div class="card" style="min-height: 260px;">
                 <div class="card-header">
