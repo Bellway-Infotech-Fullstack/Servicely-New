@@ -169,14 +169,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label class="input-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}}</label>
-                                <input type="time" name="available_time_starts" class="form-control" id="available_time_starts"
+                                <input type="time" name="available_time_starts" step="any" class="form-control" id="available_time_starts"
                                        placeholder="Ex : 10:30 am" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label class="input-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}}</label>
-                                <input type="time" name="available_time_ends" class="form-control"  id="available_time_ends" placeholder="5:45 pm"
+                                <input type="time" name="available_time_ends" step="any" class="form-control"  id="available_time_ends" placeholder="5:45 pm"
                                        required>
                             </div>
                         </div>

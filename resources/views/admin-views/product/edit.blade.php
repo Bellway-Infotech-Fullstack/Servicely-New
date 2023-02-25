@@ -183,7 +183,7 @@
                             <div class="form-group">
                                 <label class="input-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}}</label>
                                 <input type="time" value="{{$product['available_time_starts']}}" min="{{$opening_time}}"
-                                       name="available_time_starts" class="form-control" id="available_time_starts"
+                                       name="available_time_starts" step="any" class="form-control" id="available_time_starts"
                                        placeholder="Ex : 10:30 am" required>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                             <div class="form-group">
                                 <label class="input-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}}</label>
                                 <input type="time" value="{{$product['available_time_ends']}}"
-                                       name="available_time_ends" class="form-control" max="{{$closing_time}}" id="available_time_ends" placeholder="5:45 pm"
+                                       name="available_time_ends" step="any" class="form-control" max="{{$closing_time}}" id="available_time_ends" placeholder="5:45 pm"
                                        required>
                             </div>
                         </div>

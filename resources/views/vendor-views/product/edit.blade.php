@@ -178,6 +178,7 @@
                                        name="available_time_ends" class="form-control" 
                                        step="any"
                                        max="{{$closing_time}}" placeholder="5:45 pm"
+                                       
                                        required>
                             </div>
                         </div>
