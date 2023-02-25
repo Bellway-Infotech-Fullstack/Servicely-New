@@ -174,7 +174,7 @@
                                         <input type="text" name="ifsc_code" 
                                                class="form-control" id="ifsc_code"
                                                value="{{old('ifsc_code')}}"
-                                               oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1').substring(0, 11);"
+                                               oninput="this.value = this.value.replace(/[^0-9A-Za-z]/g, '').replace(/(\..*)\./g, '$1').substring(0, 11);"
                                                required>
                                     </div>
                                 </div>
