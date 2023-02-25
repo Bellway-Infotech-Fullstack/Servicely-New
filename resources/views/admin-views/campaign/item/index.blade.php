@@ -395,7 +395,10 @@
                         return $request;
                     }
                 }
-            }).trigger('change');
+            });
+
+            $('.js-data-example-ajax').reload()
+
 
              $('.js-data-vendor-ajax').select2({
                 ajax: {
