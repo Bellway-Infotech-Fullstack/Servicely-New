@@ -77,7 +77,7 @@
 
                             <div class="form-group">
                                 <label class="input-label" for="address">Pan Card Number (10 char max)</label>
-                                <input type="text" name="pan_card_number" class="form-control" placeholder="Pan Card Number" required value="{{old('pan_card_number')}}"  oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1').substring(0, 10);" />
+                                <input type="text" name="pan_card_number" class="form-control" placeholder="Pan Card Number" required value="{{old('pan_card_number')}}"  onkeypress="return validatePanCardNumber(event)"  id="pan_card_number" />
                             </div>
 
 
@@ -364,6 +364,51 @@
         });
       });
     </script>
+
+    <script type="text/javascript">
+        function validatePanCardNumber(e){
+
+             const inputField = document.querySelector('#pan_card_number');
+              const inputValue = inputField.value;
+              const key = event.keyCode || event.which;
+              const keyChar = String.fromCharCode(key);
+
+              if (inputValue.length < 10) {
+                if (inputValue.length < 5) {
+                  // Allow only alphabet characters in the first 5 positions
+                  if (/[a-zA-Z]/.test(keyChar)) {
+                    return true;
+                  } else {
+                    event.preventDefault();
+                    return false;
+                  }
+                } else if (inputValue.length < 9) {
+                  // Allow only numeric characters in positions 6-9
+                  if (/\d/.test(keyChar)) {
+                    return true;
+                  } else {
+                    event.preventDefault();
+                    return false;
+                  }
+                } else {
+                  // Allow only alphabet characters in the last position
+                  if (/[a-zA-Z]/.test(keyChar)) {
+                    return true;
+                  } else {
+                    event.preventDefault();
+                    return false;
+                  }
+                }
+              } else {
+                // Block input after the 10th character
+                event.preventDefault();
+                return false;
+              }
+
+
+        }
+    </script>
+
     <script>
         function readURL(input, viewer) {
             if (input.files && input.files[0]) {
