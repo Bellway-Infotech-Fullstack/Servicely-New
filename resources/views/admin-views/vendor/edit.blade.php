@@ -76,7 +76,7 @@
 
                             <div class="form-group">
                                 <label class="input-label" for="address">Pan Card Number</label>
-                                <input type="text" name="pan_card_number" class="form-control" placeholder="Pan Card Number" oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1').substring(0, 10);" required value="{{$vendor->pan_card_number}}" />
+                                <input type="text" name="pan_card_number" class="form-control" placeholder="Pan Card Number" onkeypress="return validatePanCardNumber(event)"  id="pan_card_number"   required value="{{$vendor->pan_card_number}}" />
                             </div>
 
 
@@ -403,6 +403,52 @@
 
 
     </script>
+
+    <script type="text/javascript">
+        function validatePanCardNumber(e){
+
+             const inputField = document.querySelector('#pan_card_number');
+              const inputValue = inputField.value;
+              const key = event.keyCode || event.which;
+              const keyChar = String.fromCharCode(key);
+
+              if (inputValue.length < 10) {
+                if (inputValue.length < 5) {
+                  // Allow only alphabet characters in the first 5 positions
+                  if (/[a-zA-Z]/.test(keyChar)) {
+                    return true;
+                  } else {
+                    event.preventDefault();
+                    return false;
+                  }
+                } else if (inputValue.length < 9) {
+                  // Allow only numeric characters in positions 6-9
+                  if (/\d/.test(keyChar)) {
+                    return true;
+                  } else {
+                    event.preventDefault();
+                    return false;
+                  }
+                } else {
+                  // Allow only alphabet characters in the last position
+                  if (/[a-zA-Z]/.test(keyChar)) {
+                    return true;
+                  } else {
+                    event.preventDefault();
+                    return false;
+                  }
+                }
+              } else {
+                // Block input after the 10th character
+                event.preventDefault();
+                return false;
+              }
+
+
+        }
+    </script>
+
+    
     <script src="https://maps.googleapis.com/maps/api/js?key={{\App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value}}&callback=initMap&v=3.45.8"></script>
     <script> 
         let myLatlng = { lat: {{$vendor->latitude}}, lng: {{$vendor->longitude}} };
